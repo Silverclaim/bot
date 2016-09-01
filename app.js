@@ -1,4 +1,5 @@
 var tmi = require("tmi.js");
+// var showConnectionNotices = true;
 
 var options = {
     options: {
@@ -16,3 +17,20 @@ var options = {
 
 var client = new tmi.client(options);
 client.connect();
+
+client.on("chat", function(channel, user, message, self){
+    if (message.match("/revlis/gi")) {
+      client.action("Silverclaim", user['display-name'] + " -- What do you want from me?!");
+    }
+});
+
+client.on("connected", function(address, port) {
+    client.action("Silverclaim", "I have returned.");
+});
+
+// client.on("join", function(channel, user, self) {
+//   if (user === channelient.getUsername()) {
+//     if(showConnectionNotices) function chatNotice(information, notifce)
+//   client.action("Silverclaim", "Hi " + user['display-name'] + "~ I see you!");
+//   }
+// });
