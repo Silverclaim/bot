@@ -19,8 +19,7 @@ var client = new tmi.client(options);
 client.connect();
 
 client.on("message", function(channel, user, message, self){
-    // if (message.match("/revlis/gi")) {
-    if (message === "!RevlisBot") {
+    if (message.match(/revlis/gi)) {
       client.say("Silverclaim", user['display-name'] + " -- What do you want from me?!");
     }
 });
@@ -29,8 +28,6 @@ client.on("connected", function(address, port) {
     client.action("Silverclaim", "I have returned.");
 });
 
-// client.on("join", function(channel, user, self) {
-//   // if (user === channelient.getUsername()) {
-//   //   if(showConnectionNotices) function chatNotice(information, notifce)
-//   client.action("Silverclaim", "Hi " + user['display-name'] + "~ I see you!");
-// });
+client.on("join", function(channel, user, self) {
+  client.action("Silverclaim", user + "~ I see you!");
+});
